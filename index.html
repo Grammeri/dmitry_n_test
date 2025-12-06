@@ -3,8 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Online Courses — Test Task</title>
-  </head>
-  <body></body>
-</html>
+    <title>Courses Catalog</title>
 
+    <!-- Подключение компилированных стилей -->
+    <link rel="stylesheet" href="./dist/css/main.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <section class="courses">
+        <!-- Заголовок -->
+        <div class="courses__header">
+          <h1 class="courses__title">Courses</h1>
+
+          <!-- Поле поиска -->
+          <div class="search">
+            <input
+              type="text"
+              class="search__input"
+              placeholder="Search courses..."
+            />
+            <span class="search__icon">🔍</span>
+          </div>
+        </div>
+
+        <!-- Фильтры -->
+        <div class="courses__filters filter">
+          <button class="filter__btn filter__btn--active" data-filter="All">
+            All
+          </button>
+          <button class="filter__btn" data-filter="Marketing">Marketing</button>
+          <button class="filter__btn" data-filter="Design">Design</button>
+          <button class="filter__btn" data-filter="Development">
+            Development
+          </button>
+        </div>
+
+        <!-- Список карточек -->
+        <div class="courses__list">
+          <!-- Здесь появятся карточки после пункта 9 -->
+        </div>
+      </section>
+    </div>
+
+    <!-- Подключение JS -->
+    <script type="module" src="./src/js/app.js"></script>
+  </body>
+</html>
