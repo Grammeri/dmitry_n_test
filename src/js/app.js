@@ -11,6 +11,9 @@ let visibleCount = ITEMS_PER_LOAD;
 let activeCategory = "All";
 let activeSearch = "";
 
+// Filtered courses list
+let filteredCourses = [...coursesData];
+
 // Get category counts
 function getCategoryCounts() {
   const counts = { All: coursesData.length };
@@ -48,23 +51,24 @@ function applyFilters(resetCount = true) {
     visibleCount = ITEMS_PER_LOAD;
   }
 
-  let result = coursesData;
-
-  // category filter
-  if (activeCategory !== "All") {
-    result = result.filter((c) => c.category === activeCategory);
+  // Apply filters
+  if (activeCategory === "All") {
+    filteredCourses = [...coursesData];
+  } else {
+    filteredCourses = coursesData.filter((c) => c.category === activeCategory);
   }
 
-  // search filter
+  // Apply search filter
   if (activeSearch.trim() !== "") {
     const q = activeSearch.toLowerCase();
-    result = result.filter(
+    filteredCourses = filteredCourses.filter(
       (c) =>
         c.title.toLowerCase().includes(q) || c.author.toLowerCase().includes(q)
     );
   }
 
-  renderCards(result);
+  renderCards(filteredCourses.slice(0, visibleCount));
+  updateLoadMoreVisibility();
 }
 
 function createCardHTML(course) {
@@ -106,7 +110,7 @@ function createCardHTML(course) {
   `;
 }
 
-function renderCards(data) {
+function renderCards(list) {
   const grid = document.querySelector(".courses__grid");
 
   if (!grid) {
@@ -116,9 +120,7 @@ function renderCards(data) {
 
   grid.innerHTML = "";
 
-  const limited = data.slice(0, visibleCount);
-
-  limited.forEach((course, index) => {
+  list.forEach((course, index) => {
     const html = createCardHTML(course);
 
     // добавляем fade-in анимацию
@@ -130,15 +132,7 @@ function renderCards(data) {
     grid.appendChild(wrapper);
   });
 
-  const loadMoreBtn = document.querySelector(".courses__load-more");
-
-  if (visibleCount >= data.length) {
-    loadMoreBtn.style.display = "none";
-  } else {
-    loadMoreBtn.style.display = "flex";
-  }
-
-  console.log("Courses rendered:", limited.length, "of", data.length);
+  console.log("Courses rendered:", list.length);
 }
 
 // Update filter buttons with counts
@@ -204,23 +198,51 @@ function initFilters() {
   });
 
   // Load more button handler
-  const loadMoreBtn = document.querySelector(".courses__load-more");
+  const loadMoreBtn = document.getElementById("loadMoreBtn");
+  const spinner = document.querySelector(".spinner");
 
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener("click", () => {
-      visibleCount += ITEMS_PER_LOAD;
-      applyFilters(false); // Don't reset count on Load more
+      spinner.classList.remove("hidden");
+      loadMoreBtn.classList.add("hidden");
+
+      // имитация загрузки (как будто с сервера)
+      setTimeout(() => {
+        visibleCount += ITEMS_PER_LOAD;
+
+        renderCards(filteredCourses.slice(0, visibleCount));
+        updateLoadMoreVisibility();
+
+        spinner.classList.add("hidden");
+      }, 700);
     });
+  }
+}
+
+// Управление видимостью кнопки
+function updateLoadMoreVisibility() {
+  const loadMoreBtn = document.getElementById("loadMoreBtn");
+
+  if (!loadMoreBtn) return;
+
+  if (visibleCount >= filteredCourses.length) {
+    loadMoreBtn.classList.add("hidden");
+  } else {
+    loadMoreBtn.classList.remove("hidden");
   }
 }
 
 // Initialize app
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
-    renderCards(coursesData);
+    filteredCourses = [...coursesData];
+    renderCards(filteredCourses.slice(0, visibleCount));
+    updateLoadMoreVisibility();
     initFilters();
   });
 } else {
-  renderCards(coursesData);
+  filteredCourses = [...coursesData];
+  renderCards(filteredCourses.slice(0, visibleCount));
+  updateLoadMoreVisibility();
   initFilters();
 }
