@@ -1,5 +1,5 @@
-@import "vars";
-@import "mixins";
+@import "./tokens";
+@import "./_mixins";
 
 // ============================================
 // COURSES SECTION (fluid responsive)
@@ -8,15 +8,16 @@
 .courses {
   padding-top: clamp(24px, 5vw, 72px);
   padding-bottom: clamp(24px, 5vw, 72px);
-  padding-left: clamp(16px, 4vw, 24px);
-  padding-right: clamp(16px, 4vw, 24px);
-  background-color: #ffffff;
+  background-color: $white;
 }
 
 .courses__container {
-  width: 100%;
-  max-width: 1300px;
+  max-width: 1320px;
   margin: 0 auto;
+  padding-left: clamp(16px, 4vw, 24px);
+  padding-right: clamp(16px, 4vw, 24px);
+  /* Prevent child elements from overflowing */
+  overflow: hidden;
 }
 
 .courses__header {
@@ -25,20 +26,22 @@
 }
 
 .courses__tagline {
-  font-size: clamp(12px, 1.4vw, 16px);
-  font-weight: 700;
-  line-height: 150%;
-  letter-spacing: clamp(0.5px, 0.2vw, 1px);
-  color: #1e212c;
-  margin-bottom: 12px;
+  @include text-style(
+    $subtitle-size,
+    $subtitle-weight,
+    $gray-900,
+    $subtitle-line-height,
+    $subtitle-letter-spacing
+  );
   text-transform: uppercase;
+  margin-bottom: 12px;
+  font-size: clamp(12px, 1.4vw, $subtitle-size);
+  letter-spacing: clamp(0.5px, 0.2vw, $subtitle-letter-spacing);
 }
 
 .courses__title {
-  font-size: clamp(28px, 3vw, 46px);
-  font-weight: 900;
-  line-height: 130%;
-  color: #1e212c;
+  @include text-style($h1-size, $h1-weight, $black, $h1-line-height);
+  font-size: clamp(28px, 3vw, $h1-size);
 }
 
 // ============================================
@@ -47,16 +50,28 @@
 
 .courses__controls {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: clamp(24px, 3vw, 40px);
-  gap: clamp(12px, 2vw, 20px);
-  flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
+  /* REMOVE any margins set by Cursor earlier */
+  margin: 0;
+  margin-bottom: clamp(24px, 4vw, 40px);
+  /* Prevent inner items from pushing outside */
+  min-width: 0;
+  /* Gap only between filter group and search */
+  gap: 16px;
+  box-sizing: border-box;
 }
 
 .courses__filters {
-  flex: 1;
-  max-width: calc(390px * 3 + 30px * 2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  /* VERY IMPORTANT */
+  min-width: 0;
+  flex: 1 1 0;
+  max-width: 100%;
 }
 
 // ============================================
@@ -65,18 +80,19 @@
 
 .courses__grid {
   display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 390px));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fill, $card-width);
+  gap: $cards-gap-x;
   margin-bottom: clamp(24px, 3vw, 40px);
+  width: 100%;
+  justify-content: space-between;
 }
 
 // ============================================
 // RESPONSIVE BREAKPOINT (only for controls)
 // ============================================
 
-@media (max-width: 480px) {
-  .courses {
+@media (max-width: $breakpoint-mobile) {
+  .courses__container {
     padding-left: 16px;
     padding-right: 16px;
   }

@@ -1,0 +1,51 @@
+@import './tokens';
+
+// General typography
+@mixin text-style($size, $weight, $color: $black, $line-height: 150%, $letter-spacing: 0) {
+  font-family: 'Lato', sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+  color: $color;
+}
+
+// Badge
+@mixin badge($bg) {
+  background-color: $bg;
+  border-radius: $badge-border-radius;
+  padding: $badge-padding;
+  @include text-style(14px, 400, $white, 150%);
+}
+
+// Two-layer Figma shadow
+@mixin card-shadow {
+  box-shadow: $shadow-1, $shadow-2;
+}
+
+// Tab button
+@mixin tab-button($active: false) {
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: $tab-font-size;
+  font-weight: $tab-font-weight;
+  @if $active == true {
+    background-color: rgba($primary, 0.1);
+    color: $primary;
+    border: 1px solid $primary;
+  } @else {
+    background-color: $gray-200;
+    color: $gray-700;
+    border: 1px solid transparent;
+  }
+}
+
+// Load more
+@mixin button-link {
+  @include text-style(16px, 700, $gray-700, 160%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+

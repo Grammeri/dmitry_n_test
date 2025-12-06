@@ -1,4 +1,4 @@
-@import "vars";
+@import "./tokens";
 
 /* Reset */
 * {
@@ -8,6 +8,6 @@
 }
 
 body {
-  font-family: $font-family-primary;
-  background-color: $color-bg-primary;
+  font-family: 'Lato', sans-serif;
+  background-color: $white;
 }

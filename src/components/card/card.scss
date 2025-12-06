@@ -1,4 +1,4 @@
-@import "../../styles/vars";
+@import "../../styles/tokens";
 @import "../../styles/mixins";
 
 // ============================================
@@ -6,14 +6,14 @@
 // ============================================
 
 .course-card {
-  width: 100%;
-  max-width: 390px;
-  background-color: $color-bg-primary;
-  border: 1px solid $color-border;
-  border-radius: 4px;
+  width: $card-width;
+  height: $card-height;
+  background-color: $white;
+  border: $card-border;
+  border-radius: $card-radius;
   overflow: hidden;
-  box-shadow: $shadow-card;
-  transition: $transition-base;
+  @include card-shadow;
+  transition: all 0.3s ease;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -21,7 +21,7 @@
 
 .course-card:hover {
   transform: translateY(-4px);
-  box-shadow: $shadow-card-hover;
+  box-shadow: $shadow-1, $shadow-2;
 }
 
 // ============================================
@@ -33,7 +33,7 @@
   width: 100%;
   height: 240px; /* exact Figma value */
   overflow: hidden;
-  background-color: $color-bg-secondary;
+  background-color: $gray-100;
 }
 
 .course-card__image {
@@ -43,7 +43,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: $border-radius-card $border-radius-card 0 0;
+  border-radius: $card-radius $card-radius 0 0;
 }
 
 // Placeholder image styles - smaller and centered
@@ -90,35 +90,35 @@
   display: inline-block;
   padding: clamp(1px, 0.2vw, 1px) clamp(6px, 1vw, 8px);
   height: auto;
-  min-height: clamp(18px, 2vw, 21px);
+  min-height: clamp(18px, 2vw, $badge-height);
   font-size: clamp(12px, 1.4vw, 14px);
-  font-weight: $font-weight-normal;
-  line-height: $line-height-badge;
-  border-radius: $border-radius-badge;
-  color: $color-text-inverse;
-  margin-bottom: $spacing-3;
+  font-weight: 400;
+  line-height: 150%;
+  border-radius: $badge-border-radius;
+  color: $white;
+  margin-bottom: 12px;
   width: fit-content;
 }
 
 /* Category badge colors */
 .badge--marketing {
-  background-color: $color-badge-marketing;
+  @include badge($badge-marketing);
 }
 
 .badge--management {
-  background-color: $color-badge-management;
+  @include badge($badge-management);
 }
 
 .badge--hr {
-  background-color: $color-badge-hr;
+  @include badge($badge-hr);
 }
 
 .badge--design {
-  background-color: $color-badge-design;
+  @include badge($badge-design);
 }
 
 .badge--development {
-  background-color: $color-badge-development;
+  @include badge($badge-development);
 }
 
 // ============================================
@@ -126,10 +126,8 @@
 // ============================================
 
 .course-card__title {
-  font-size: clamp(14px, 1.8vw, 20px);
-  font-weight: $font-weight-bold;
-  line-height: $line-height-card-title;
-  color: $color-text-primary;
+  @include text-style($card-title-size, $card-title-weight, $black, 150%);
+  font-size: clamp(14px, 1.8vw, $card-title-size);
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -146,28 +144,24 @@
 .course-card__meta {
   display: flex;
   align-items: center;
-  gap: $spacing-2;
+  gap: 8px;
   margin-top: auto;
 }
 
 .course-card__price {
-  font-size: clamp(12px, 1.6vw, 18px);
-  font-weight: $font-weight-bold;
-  line-height: $line-height-price;
-  color: $color-price;
+  @include text-style($price-size, $price-weight, $danger, 150%);
+  font-size: clamp(12px, 1.6vw, $price-size);
   white-space: nowrap;
 }
 
 .course-card__separator {
-  color: $color-text-secondary;
-  font-size: $font-size-author;
+  color: $gray-700;
+  font-size: $speaker-size;
 }
 
 .course-card__author {
-  font-size: clamp(12px, 1.6vw, 18px);
-  font-weight: $font-weight-normal;
-  line-height: $line-height-author;
-  color: $color-text-secondary;
+  @include text-style($speaker-size, $speaker-weight, $gray-700, 150%);
+  font-size: clamp(12px, 1.6vw, $speaker-size);
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
@@ -176,7 +170,7 @@
 // MOBILE RESPONSIVE
 // ============================================
 
-@media (max-width: 480px) {
+@media (max-width: $breakpoint-mobile) {
   .course-card {
     max-width: 100%;
   }

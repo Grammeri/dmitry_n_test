@@ -1,0 +1,125 @@
+// -----------------------------------
+// BRAND COLORS
+// -----------------------------------
+
+$primary: #FF3F3A;
+$danger: #FF4242;
+$success: #03CEA4;
+$warning: #F89828;
+$info: #5A87FC;
+$design: #F52F6E;
+
+// -----------------------------------
+// GRAYS / BLACKS (TEXT, BORDERS)
+// -----------------------------------
+
+$black: #1E212C;
+$gray-900: #1E212C;
+$gray-700: #787A80;
+$gray-300: #E5E8ED;
+$gray-200: #F4F5F7;
+$gray-100: #F9F9F9;
+
+// -----------------------------------
+// WHITE
+// -----------------------------------
+
+$white: #FFFFFF;
+
+// -----------------------------------
+// INPUT COLORS
+// -----------------------------------
+
+$input-border: #D7DADD;
+$input-icon: #9A9CA5;
+$input-placeholder: #9A9CA5;
+
+// -----------------------------------
+// SHADOW COLORS (Figma 2-layer shadow)
+// -----------------------------------
+
+$shadow-dark: rgba(30, 33, 44, 0.03);
+$shadow-light: rgba(154, 156, 165, 0.04);
+
+// SHADOW SIZES
+$shadow-1: 0 4px 4px -4px $shadow-dark;
+$shadow-2: 0 12px 10px -6px $shadow-light;
+
+// -----------------------------------
+// LAYOUT / CONTAINER
+// -----------------------------------
+
+$container-width: 1230px;
+$container-padding: calc((100vw - $container-width) / 2);
+$cards-gap-x: 24px;  // horizontal card gap (reduced for better spacing)
+$cards-gap-y: 24px;  // vertical card gap
+
+// -----------------------------------
+// BREAKPOINTS
+// -----------------------------------
+
+$breakpoint-desktop: 1440px;
+$breakpoint-laptop: 1024px;
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 480px;
+$breakpoint-small-mobile: 360px;
+
+// -----------------------------------
+// TYPOGRAPHY
+// -----------------------------------
+
+// H1
+$h1-size: 46px;
+$h1-weight: 900;
+$h1-line-height: 130%;
+
+// Subtitle
+$subtitle-size: 16px;
+$subtitle-weight: 700;
+$subtitle-line-height: 150%;
+$subtitle-letter-spacing: 1px;
+
+// Tabs
+$tab-font-size: 16px;
+$tab-font-weight: 700;
+$tab-count-size: 12px;
+$tab-count-color: $gray-700;
+
+// Card Title
+$card-title-size: 20px;
+$card-title-weight: 700;
+
+// Price
+$price-size: 18px;
+$price-weight: 700;
+
+// Speaker
+$speaker-size: 18px;
+$speaker-weight: 400;
+
+// Badge
+$badge-height: 23px;
+$badge-border-radius: 4px;
+$badge-padding: 1px 8px;
+$badge-marketing: $success;
+$badge-management: $info;
+$badge-hr: $warning;
+$badge-design: $design;
+$badge-development: #a855f7;
+
+// Input sizes
+$input-height: 46px;
+$input-radius: 4px;
+$input-padding: 12px 16px;
+$input-width: clamp(180px, 22vw, 260px);
+
+// Card sizes
+$card-width: 400px;
+$card-height: 438px;
+$card-radius: 4px;
+$card-border: 1px solid $gray-300;
+
+// Card inner
+$card-content-width: 342px;
+$card-content-gap: 20px;
+

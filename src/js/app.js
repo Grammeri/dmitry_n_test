@@ -3,9 +3,27 @@ import { coursesData } from "./data.js";
 console.log("App started");
 console.log("Courses data:", coursesData);
 
+// Load more state
+let ITEMS_PER_LOAD = 9;
+let visibleCount = ITEMS_PER_LOAD;
+
 // State for filters
 let activeCategory = "All";
 let activeSearch = "";
+
+// Get category counts
+function getCategoryCounts() {
+  const counts = { All: coursesData.length };
+
+  coursesData.forEach((c) => {
+    if (!counts[c.category]) counts[c.category] = 0;
+    counts[c.category]++;
+  });
+
+  return counts;
+}
+
+const categoryCounts = getCategoryCounts();
 
 function getBadgeClass(category) {
   if (category === "Marketing") return "badge--marketing";
@@ -24,15 +42,20 @@ function setActiveFilter(button) {
   button.classList.add("courses__filter-button_active");
 }
 
-function applyFilters() {
+function applyFilters(resetCount = true) {
+  // Reset visible count when filters change (not on Load more)
+  if (resetCount) {
+    visibleCount = ITEMS_PER_LOAD;
+  }
+
   let result = coursesData;
 
-  // Category filter
+  // category filter
   if (activeCategory !== "All") {
     result = result.filter((c) => c.category === activeCategory);
   }
 
-  // Search filter
+  // search filter
   if (activeSearch.trim() !== "") {
     const q = activeSearch.toLowerCase();
     result = result.filter(
@@ -41,10 +64,49 @@ function applyFilters() {
     );
   }
 
-  renderCourses(result);
+  renderCards(result);
 }
 
-function renderCourses(list) {
+function createCardHTML(course) {
+  const badgeClass = getBadgeClass(course.category);
+  const isPlaceholder = course.img.includes("placeholder");
+  const placeholderClass = isPlaceholder
+    ? "course-card__image-wrapper--placeholder"
+    : "";
+
+  return `
+    <article class="course-card">
+      <div class="course-card__image-wrapper ${placeholderClass}">
+        <img 
+          src="${course.img}" 
+          alt="" 
+          class="course-card__image"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="course-card__content">
+        <span class="course-card__badge ${badgeClass}">
+          ${course.category}
+        </span>
+        <h2 class="course-card__title">${course.title}</h2>
+
+        <div class="course-card__meta">
+          ${
+            course.price !== null
+              ? `<span class="course-card__price">$${course.price}</span><span class="course-card__separator">|</span>`
+              : ""
+          }
+          <span class="course-card__author">${
+            course.author === "—" ? course.author : `by ${course.author}`
+          }</span>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderCards(data) {
   const grid = document.querySelector(".courses__grid");
 
   if (!grid) {
@@ -54,62 +116,53 @@ function renderCourses(list) {
 
   grid.innerHTML = "";
 
-  list.forEach((course) => {
-    const badgeClass = getBadgeClass(course.category);
-    const isPlaceholder = course.img.includes("placeholder");
-    const placeholderClass = isPlaceholder
-      ? "course-card__image-wrapper--placeholder"
-      : "";
+  const limited = data.slice(0, visibleCount);
 
-    const cardHTML = `
-      <article class="course-card">
-        <div class="course-card__image-wrapper ${placeholderClass}">
-          <img 
-            src="${course.img}" 
-            alt="" 
-            class="course-card__image"
-            loading="lazy"
-          />
-        </div>
+  limited.forEach((course, index) => {
+    const html = createCardHTML(course);
 
-        <div class="course-card__content">
-          <span class="course-card__badge ${badgeClass}">
-            ${course.category}
-          </span>
-          <h2 class="course-card__title">${course.title}</h2>
+    // добавляем fade-in анимацию
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("fade-in-item");
+    wrapper.style.animationDelay = `${index * 40}ms`;
+    wrapper.innerHTML = html;
 
-          <div class="course-card__meta">
-            ${
-              course.price !== null
-                ? `<span class="course-card__price">$${course.price}</span><span class="course-card__separator">|</span>`
-                : ""
-            }
-            <span class="course-card__author">${
-              course.author === "—" ? course.author : `by ${course.author}`
-            }</span>
-          </div>
-        </div>
-      </article>
-    `;
-
-    grid.insertAdjacentHTML("beforeend", cardHTML);
+    grid.appendChild(wrapper);
   });
 
-  const images = grid.querySelectorAll(".course-card__image");
-  images.forEach((img, index) => {
-    const fullPath = new URL(img.src, window.location.href).href;
-    console.log(`Image ${index + 1}: ${img.src} -> ${fullPath}`);
-    img.addEventListener("error", (e) => {
-      console.error(`Failed to load image ${index + 1}:`, img.src);
-      console.error("Full URL:", fullPath);
-      console.error("Error:", e);
-    });
-    img.addEventListener("load", () => {
-      console.log(`✓ Loaded image ${index + 1}: ${img.src}`);
-    });
-  });
+  const loadMoreBtn = document.querySelector(".courses__load-more");
 
-  console.log("Courses rendered:", list.length);
+  if (visibleCount >= data.length) {
+    loadMoreBtn.style.display = "none";
+  } else {
+    loadMoreBtn.style.display = "flex";
+  }
+
+  console.log("Courses rendered:", limited.length, "of", data.length);
+}
+
+// Update filter buttons with counts
+function updateFilterButtons() {
+  const categoryNames = {
+    All: "All",
+    Marketing: "Marketing",
+    Management: "Management",
+    "HR & Recruiting": "HR & Recruiting",
+    Design: "Design",
+    Development: "Development",
+  };
+
+  const buttons = document.querySelectorAll(".courses__filter-button");
+
+  buttons.forEach((btn) => {
+    const category = btn.dataset.category;
+    if (!category) return;
+
+    const count = categoryCounts[category] || 0;
+    const categoryName = categoryNames[category] || category;
+
+    btn.innerHTML = `${categoryName} <sup>${count}</sup>`;
+  });
 }
 
 // Initialize filters and search
@@ -120,6 +173,9 @@ function initFilters() {
     console.error("Filters container not found!");
     return;
   }
+
+  // Update buttons with counts
+  updateFilterButtons();
 
   // Category filter click handler
   filtersContainer.addEventListener("click", (event) => {
@@ -146,15 +202,25 @@ function initFilters() {
     activeSearch = searchInput.value;
     applyFilters();
   });
+
+  // Load more button handler
+  const loadMoreBtn = document.querySelector(".courses__load-more");
+
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener("click", () => {
+      visibleCount += ITEMS_PER_LOAD;
+      applyFilters(false); // Don't reset count on Load more
+    });
+  }
 }
 
 // Initialize app
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
-    renderCourses(coursesData);
+    renderCards(coursesData);
     initFilters();
   });
 } else {
-  renderCourses(coursesData);
+  renderCards(coursesData);
   initFilters();
 }

@@ -1,4 +1,4 @@
-@import "../../styles/vars";
+@import "../../styles/tokens";
 @import "../../styles/mixins";
 
 // ============================================
@@ -7,30 +7,31 @@
 
 .search {
   position: relative;
-  width: clamp(180px, 25vw, 260px);
+  width: $input-width;
+  max-width: 100%;
+  box-sizing: border-box;
 
   &__input {
     width: 100%;
-    height: clamp(32px, 4vw, 44px);
+    height: clamp(32px, 4vw, $input-height);
     padding: 0 clamp(36px, 4vw, 44px) 0 16px; // ← место под иконку справа
-    border: 1px solid #D7DADD;
-    border-radius: 4px;
-    font-size: clamp(14px, 1.6vw, 16px);
-    color: #424551;
+    border: 1px solid $input-border;
+    border-radius: $input-radius;
+    @include text-style(clamp(14px, 1.6vw, 16px), 400, $black, 150%);
     outline: none;
     transition: border 0.2s ease;
-    background-color: #ffffff;
+    background-color: $white;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239A9CA5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right clamp(10px, 1.5vw, 14px) center; // ← иконка справа
     background-size: clamp(16px, 2vw, 20px);
 
     &::placeholder {
-      color: #9A9CA5;
+      color: $input-placeholder;
     }
 
     &:focus {
-      border-color: #FF3F3A;
+      border-color: $primary;
     }
   }
 }
@@ -38,6 +39,19 @@
 // Для совместимости со старыми классами
 .courses__search {
   @extend .search;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /* THIS prevents search from expanding container */
+  flex-shrink: 0;
+  flex-basis: auto;
+  /* EXACT Figma size - but never exceed available space */
+  width: clamp(180px, 20vw, 260px);
+  max-width: min(260px, calc(100% - 16px));
+  min-width: 180px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .courses__search-input {
