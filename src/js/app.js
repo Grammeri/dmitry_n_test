@@ -3,6 +3,10 @@ import { coursesData } from "./data.js";
 console.log("App started");
 console.log("Courses data:", coursesData);
 
+// State for filters
+let activeCategory = "All";
+let activeSearch = "";
+
 function getBadgeClass(category) {
   if (category === "Marketing") return "badge--marketing";
   if (category === "Management") return "badge--management";
@@ -20,15 +24,24 @@ function setActiveFilter(button) {
   button.classList.add("courses__filter-button_active");
 }
 
-function applyFilter(category) {
-  if (category === "All") {
-    renderCourses(coursesData);
-    return;
+function applyFilters() {
+  let result = coursesData;
+
+  // Category filter
+  if (activeCategory !== "All") {
+    result = result.filter((c) => c.category === activeCategory);
   }
 
-  const filtered = coursesData.filter((course) => course.category === category);
+  // Search filter
+  if (activeSearch.trim() !== "") {
+    const q = activeSearch.toLowerCase();
+    result = result.filter(
+      (c) =>
+        c.title.toLowerCase().includes(q) || c.author.toLowerCase().includes(q)
+    );
+  }
 
-  renderCourses(filtered);
+  renderCourses(result);
 }
 
 function renderCourses(list) {
@@ -99,7 +112,7 @@ function renderCourses(list) {
   console.log("Courses rendered:", list.length);
 }
 
-// Initialize filters
+// Initialize filters and search
 function initFilters() {
   const filtersContainer = document.querySelector(".courses__filters");
 
@@ -108,6 +121,7 @@ function initFilters() {
     return;
   }
 
+  // Category filter click handler
   filtersContainer.addEventListener("click", (event) => {
     const btn = event.target.closest(".courses__filter-button");
     if (!btn) return;
@@ -115,8 +129,22 @@ function initFilters() {
     const category = btn.dataset.category;
     if (!category) return;
 
+    activeCategory = category;
     setActiveFilter(btn);
-    applyFilter(category);
+    applyFilters();
+  });
+
+  // Search input handler
+  const searchInput = document.querySelector(".search__input");
+
+  if (!searchInput) {
+    console.error("Search input not found!");
+    return;
+  }
+
+  searchInput.addEventListener("input", () => {
+    activeSearch = searchInput.value;
+    applyFilters();
   });
 }
 
