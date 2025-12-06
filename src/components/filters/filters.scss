@@ -8,12 +8,13 @@
 .courses__filters {
   display: flex;
   list-style: none;
-  gap: 12px;
+  gap: clamp(6px, 1vw, 16px);
   overflow-x: auto;
   flex: 1;
   min-width: 0;
   scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
+  flex-wrap: wrap;
 }
 
 .courses__filters::-webkit-scrollbar {
@@ -34,12 +35,13 @@
 }
 
 .courses__filter-button {
-  padding: 0 20px;
-  height: 26px;
+  padding: clamp(6px, 1vw, 12px) clamp(12px, 2vw, 20px);
+  height: auto;
+  min-height: 26px;
   border-radius: 4px;
   border: 1px solid #e5e8ed;
   background: #f4f5f6;
-  font-size: 16px;
+  font-size: clamp(12px, 1.6vw, 14px);
   font-weight: 700;
   line-height: 160%;
   color: #9a9ca5;
