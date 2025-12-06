@@ -12,6 +12,25 @@ function getBadgeClass(category) {
   return "";
 }
 
+// Filter functionality
+function setActiveFilter(button) {
+  document
+    .querySelectorAll(".courses__filter-button")
+    .forEach((btn) => btn.classList.remove("courses__filter-button_active"));
+  button.classList.add("courses__filter-button_active");
+}
+
+function applyFilter(category) {
+  if (category === "All") {
+    renderCourses(coursesData);
+    return;
+  }
+
+  const filtered = coursesData.filter((course) => course.category === category);
+
+  renderCourses(filtered);
+}
+
 function renderCourses(list) {
   const grid = document.querySelector(".courses__grid");
 
@@ -80,10 +99,34 @@ function renderCourses(list) {
   console.log("Courses rendered:", list.length);
 }
 
+// Initialize filters
+function initFilters() {
+  const filtersContainer = document.querySelector(".courses__filters");
+
+  if (!filtersContainer) {
+    console.error("Filters container not found!");
+    return;
+  }
+
+  filtersContainer.addEventListener("click", (event) => {
+    const btn = event.target.closest(".courses__filter-button");
+    if (!btn) return;
+
+    const category = btn.dataset.category;
+    if (!category) return;
+
+    setActiveFilter(btn);
+    applyFilter(category);
+  });
+}
+
+// Initialize app
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
     renderCourses(coursesData);
+    initFilters();
   });
 } else {
   renderCourses(coursesData);
+  initFilters();
 }
