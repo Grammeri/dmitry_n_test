@@ -1,2 +1,35 @@
-// Layout styles will be added here
+@import "vars";
+@import "mixins";
 
+// ============================================
+// PAGE CONTAINER
+// ============================================
+
+.container {
+  @include container;
+}
+
+// ============================================
+// COURSES SECTION
+// ============================================
+
+.courses {
+  padding-top: clamp(24px, 5vw, 48px);
+  padding-bottom: clamp(24px, 5vw, 48px);
+
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-8;
+  }
+
+  &__filters {
+    margin-bottom: $spacing-8;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp($card-gap-min, 2vw, $card-gap-max);
+    justify-content: center;
+  }
+}

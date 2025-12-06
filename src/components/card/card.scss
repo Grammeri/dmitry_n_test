@@ -11,7 +11,7 @@
   @include card-hover-shadow;
   @include shadow-transition;
 
-  width: $card-width-clamp;
+  flex: 1 1 $card-width-clamp;
   overflow: hidden;
   gap: clamp($card-gap-min, 1vw, $card-gap-max);
 
