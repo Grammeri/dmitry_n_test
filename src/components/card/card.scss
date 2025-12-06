@@ -1,2 +1,99 @@
-// Card component styles will be added here
+@import "../../styles/vars";
+@import "../../styles/mixins";
 
+// ============================================
+// CARD COMPONENT
+// ============================================
+
+.card {
+  @include card-base;
+  @include flex-column;
+  @include card-hover-shadow;
+  @include shadow-transition;
+
+  width: $card-width-clamp;
+  overflow: hidden;
+  gap: clamp($card-gap-min, 1vw, $card-gap-max);
+
+  &--hidden {
+    display: none;
+  }
+}
+
+// ============================================
+// CARD IMAGE
+// ============================================
+
+.card__image {
+  @include fixed-img;
+  display: block;
+  margin: 0;
+}
+
+// ============================================
+// CARD BODY
+// ============================================
+
+.card__body {
+  @include flex-column;
+  gap: $spacing-2;
+  flex: 1;
+}
+
+// ============================================
+// CARD TAG (PILL)
+// ============================================
+
+.card__tag {
+  display: inline-block;
+  padding: $spacing-1 $spacing-3;
+  border-radius: $border-radius-full;
+  background: $color-bg-secondary;
+  color: $color-text-secondary;
+  @include text-xs;
+  font-weight: $font-weight-medium;
+  width: fit-content;
+}
+
+// ============================================
+// CARD TITLE
+// ============================================
+
+.card__title {
+  @include heading-sm;
+  color: $color-text-primary;
+  @include ellipsis-lines(2);
+  margin: 0;
+}
+
+// ============================================
+// CARD META (Price + Author container)
+// ============================================
+
+.card__meta {
+  @include flex-between;
+  margin-top: auto;
+  gap: $spacing-2;
+}
+
+// ============================================
+// CARD PRICE
+// ============================================
+
+.card__price {
+  @include text-lg;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  margin: 0;
+}
+
+// ============================================
+// CARD AUTHOR
+// ============================================
+
+.card__author {
+  @include text-sm;
+  color: $color-text-secondary;
+  @include ellipsis;
+  margin: 0;
+}
