@@ -8,16 +8,19 @@
 .categories {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px; /* spacing between tabs */
+  gap: 12px;
   min-width: 0;
   flex: 1 1 0;
   max-width: 100%;
-  margin: 0; /* no external margin */
-  padding: 0; /* no internal padding */
+  margin: 0;
+  padding: 0;
 }
 
 .categories__tab {
-  @include tab-button(false);
+  background-color: $white;
+  color: $black;
+  border: 1px solid $gray-300;
+  border-radius: 4px;
   padding: clamp(6px, 1vw, 10px) clamp(12px, 2vw, 20px);
   height: auto;
   min-height: 26px;
@@ -27,15 +30,16 @@
   justify-content: center;
   transition: all 0.2s ease;
   cursor: pointer;
-  margin: 0; /* no external margin */
-  border: none;
+  margin: 0;
   font-family: inherit;
+  font-size: $tab-font-size;
+  font-weight: $tab-font-weight;
 }
 
 .categories__tab:hover {
+  background-color: transparent;
   border-color: $primary;
   color: $primary;
-  background: $white;
 }
 
 .categories__tab:focus {
@@ -44,26 +48,27 @@
 }
 
 .categories__tab--active {
-  @include tab-button(true);
-  outline: none; /* убираем outline для активной кнопки, чтобы не было двойной обводки */
+  background-color: transparent !important;
+  color: $primary !important;
+  border: 1px solid $primary !important;
+  outline: none;
 }
 
 .categories__tab--active:focus {
-  outline: none; /* убираем outline при фокусе на активной кнопке */
+  outline: none;
 }
 
 .categories__tab--active:hover {
-  background: $white;
+  background-color: transparent;
   border-color: $primary;
   color: $primary;
 }
 
-// Category counters
 .categories__tab sup {
   font-size: $tab-count-size;
   color: $tab-count-color;
   font-weight: 400;
-  margin-left: 4px; /* internal spacing, OK */
+  margin-left: 4px;
   position: relative;
   top: -1px;
 }
@@ -71,4 +76,3 @@
 .categories__tab--active sup {
   color: $primary;
 }
-

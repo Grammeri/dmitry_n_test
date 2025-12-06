@@ -8,8 +8,8 @@
 .courses {
   padding-top: clamp(24px, 5vw, 72px);
   padding-bottom: clamp(24px, 5vw, 72px);
-  padding-left: 24px; /* горизонтальный padding перенесен сюда */
-  padding-right: 24px; /* горизонтальный padding перенесен сюда */
+  padding-left: 24px;
+  padding-right: 24px;
   background-color: $white;
 }
 
@@ -17,8 +17,7 @@
   max-width: 1230px;
   width: 100%;
   margin: 0 auto;
-  padding: 0; /* remove all horizontal padding */
-  /* Prevent child elements from overflowing */
+  padding: 0;
   overflow: hidden;
 }
 
@@ -26,16 +25,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px; /* по Figma между subtitle и h1 */
-  margin-bottom: clamp(
-    40px,
-    5vw,
-    80px
-  ); /* увеличенное расстояние до фильтров */
+  gap: 8px;
+  margin-bottom: clamp(40px, 5vw, 80px);
   width: 100%;
 }
 
-// ENJOY YOUR STUDYING!
 .courses__subtitle {
   @include text-style(
     $subtitle-size,
@@ -45,19 +39,18 @@
     $subtitle-letter-spacing
   );
   text-transform: uppercase;
-  margin: 0; /* no external margin */
+  margin: 0;
 }
 
-// Our online courses
 .courses__title {
   @include text-style($h1-size, $h1-weight, $gray-900, $h1-line-height, 0);
-  margin: 0; /* no external margin */
-  max-width: 392px; /* Figma exact width - limit but don't force */
-  white-space: nowrap; /* prevent text wrapping to 2 lines */
+  margin: 0;
+  max-width: 392px;
+  white-space: nowrap;
   text-align: center;
-  font-size: 46px; /* вернул оригинальный размер */
-  font-weight: 700; /* обычный жирный вместо 900 */
-  letter-spacing: 0; /* вернул оригинальный spacing */
+  font-size: 46px;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 // ============================================
@@ -67,22 +60,15 @@
 .courses__controls {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* фильтры слева, поиск справа */
+  justify-content: space-between;
   width: 100%;
   max-width: 1230px;
   margin: 0 auto;
-  margin-bottom: clamp(
-    40px,
-    5vw,
-    60px
-  ); /* увеличенное расстояние до карточек по Figma */
+  margin-bottom: clamp(40px, 5vw, 60px);
   gap: 16px;
   box-sizing: border-box;
-  /* Prevent inner items from pushing outside */
   min-width: 0;
 }
-
-// Categories block is imported from components
 
 // ============================================
 // GRID (pixel-perfect 3 columns at 1920px)
@@ -90,13 +76,9 @@
 
 .courses__grid {
   display: grid;
-  grid-template-columns: repeat(3, $card-width); // 3 columns - Figma exact
-  gap: $cards-gap-x; // 30px - Figma exact
-  margin-bottom: clamp(
-    60px,
-    6vw,
-    80px
-  ); /* увеличенное расстояние до Load more по Figma */
+  grid-template-columns: repeat(3, $card-width);
+  gap: $cards-gap-x;
+  margin-bottom: clamp(60px, 6vw, 80px);
   width: 100%;
   justify-content: space-between;
 }
@@ -107,8 +89,8 @@
 
 @media (max-width: $breakpoint-mobile) {
   .courses {
-    padding-left: 16px; /* мобильный padding */
-    padding-right: 16px; /* мобильный padding */
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .courses__title {
@@ -126,9 +108,9 @@
   }
 
   .search {
-    width: 100%; // на мобильных растягиваем на всю ширину
+    width: 100%;
     max-width: 100%;
-    margin-left: 0; // убираем auto на мобильных
+    margin-left: 0;
   }
 
   .courses__grid {

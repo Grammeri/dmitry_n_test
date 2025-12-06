@@ -1,8 +1,13 @@
-@import './tokens';
+@import "./tokens";
 
-// General typography
-@mixin text-style($size, $weight, $color: $black, $line-height: 150%, $letter-spacing: 0) {
-  font-family: 'Lato', sans-serif;
+@mixin text-style(
+  $size,
+  $weight,
+  $color: $black,
+  $line-height: 150%,
+  $letter-spacing: 0
+) {
+  font-family: "Lato", sans-serif;
   font-size: $size;
   font-weight: $weight;
   line-height: $line-height;
@@ -10,7 +15,6 @@
   color: $color;
 }
 
-// Badge
 @mixin badge($bg) {
   background-color: $bg;
   border-radius: $badge-border-radius;
@@ -18,12 +22,10 @@
   @include text-style(14px, 400, $white, 150%);
 }
 
-// Two-layer Figma shadow
 @mixin card-shadow {
-  box-shadow: $shadow-1, $shadow-2;
+  box-shadow: $shadow-1, $shadow-2, $shadow-3;
 }
 
-// Tab button
 @mixin tab-button($active: false) {
   border-radius: 4px;
   padding: 10px 20px;
@@ -40,7 +42,6 @@
   }
 }
 
-// Load more
 @mixin button-link {
   @include text-style(16px, 700, $gray-700, 160%);
   display: inline-flex;
@@ -48,4 +49,3 @@
   gap: 8px;
   cursor: pointer;
 }
-
