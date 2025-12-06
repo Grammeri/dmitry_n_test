@@ -1,2 +1,65 @@
-// Courses data will be added here
-
+export const coursesData = [
+  {
+    category: "Marketing",
+    title: "The Ultimate Google Ads Training Course",
+    price: 100,
+    author: "Jerome Bell",
+    img: "./assets/images/jerome-bell.jpg",
+  },
+  {
+    category: "Management",
+    title: "Product Management Fundamentals",
+    price: 480,
+    author: "Marvin McKinney",
+    img: "./assets/images/marvin-mckinney.jpg",
+  },
+  {
+    category: "HR & Recruiting",
+    title: "HR Management and Analytics",
+    price: 200,
+    author: "Leslie Alexander Li",
+    img: "./assets/images/leslie-alexander-li.jpg",
+  },
+  {
+    category: "Marketing",
+    title: "Brand Management & PR Communications",
+    price: 530,
+    author: "Kristin Watson",
+    img: "./assets/images/kristin-watson.jpg",
+  },
+  {
+    category: "Design",
+    title: "Graphic Design Basic",
+    price: 500,
+    author: "Guy Hawkins",
+    img: "./assets/images/guy-hawkins.jpg",
+  },
+  {
+    category: "Management",
+    title: "Business Development Management",
+    price: 400,
+    author: "Dianne Russell",
+    img: "./assets/images/dianne-russell.jpg",
+  },
+  {
+    category: "Development",
+    title: "Highload Software Architecture",
+    price: 600,
+    author: "Brooklyn Simmons",
+    img: "./assets/images/brooklyn-simmons.jpg",
+  },
+  {
+    category: "HR & Recruiting",
+    title: "Human Resources – Selection and Recruitment",
+    price: 150,
+    author: "Kathryn Murphy",
+    img: "./assets/images/kathryn-murphy.jpg",
+  },
+  {
+    category: "Design",
+    title: "User Experience. Human-centered Design",
+    price: 240,
+    author: "Cody Fisher",
+    img: "./assets/images/cody-fisher.jpg",
+  },
+];
