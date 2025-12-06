@@ -24,13 +24,17 @@ function renderCourses(list) {
 
   list.forEach((course) => {
     const badgeClass = getBadgeClass(course.category);
+    const isPlaceholder = course.img.includes("placeholder");
+    const placeholderClass = isPlaceholder
+      ? "course-card__image-wrapper--placeholder"
+      : "";
 
     const cardHTML = `
       <article class="course-card">
-        <div class="course-card__image-wrapper">
+        <div class="course-card__image-wrapper ${placeholderClass}">
           <img 
             src="${course.img}" 
-            alt="${course.title}" 
+            alt="" 
             class="course-card__image"
             loading="lazy"
           />
@@ -43,9 +47,14 @@ function renderCourses(list) {
           <h2 class="course-card__title">${course.title}</h2>
 
           <div class="course-card__meta">
-            <span class="course-card__price">$${course.price}</span>
-            <span class="course-card__separator">|</span>
-            <span class="course-card__author">by ${course.author}</span>
+            ${
+              course.price !== null
+                ? `<span class="course-card__price">$${course.price}</span><span class="course-card__separator">|</span>`
+                : ""
+            }
+            <span class="course-card__author">${
+              course.author === "—" ? course.author : `by ${course.author}`
+            }</span>
           </div>
         </div>
       </article>
