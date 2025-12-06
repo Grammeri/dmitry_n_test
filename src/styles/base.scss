@@ -11,3 +11,9 @@ body {
   font-family: 'Lato', sans-serif;
   background-color: $white;
 }
+
+// Global h1 letter-spacing fix (pixel-perfect Figma)
+h1,
+.courses__title {
+  letter-spacing: 0; // EXACTLY as in Figma
+}

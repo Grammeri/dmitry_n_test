@@ -49,10 +49,10 @@ $shadow-2: 0 12px 10px -6px $shadow-light;
 // LAYOUT / CONTAINER
 // -----------------------------------
 
-$container-width: 1230px;
+$container-width: 1230px; // Figma exact value
 $container-padding: calc((100vw - $container-width) / 2);
-$cards-gap-x: 24px;  // horizontal card gap (reduced for better spacing)
-$cards-gap-y: 24px;  // vertical card gap
+$cards-gap-x: 30px;  // Figma exact value (horizontal card gap)
+$cards-gap-y: 30px;  // Figma exact value (vertical card gap)
 
 // -----------------------------------
 // BREAKPOINTS
@@ -108,18 +108,23 @@ $badge-design: $design;
 $badge-development: #a855f7;
 
 // Input sizes
-$input-height: 46px;
+$input-height: 44px; // Figma exact: 44px
 $input-radius: 4px;
 $input-padding: 12px 16px;
-$input-width: clamp(180px, 22vw, 260px);
+$input-width: 340px; // увеличенная ширина до красной линии
 
 // Card sizes
-$card-width: 400px;
-$card-height: 438px;
+$card-width: 390px; // Figma exact value
+$card-height: 438px; // Figma exact value
 $card-radius: 4px;
 $card-border: 1px solid $gray-300;
 
+// Card image
+$card-image-height: 300px; // Figma exact value (to be verified)
+
 // Card inner
-$card-content-width: 342px;
-$card-content-gap: 20px;
+$card-content-width: 342px; // Figma exact value
+$card-content-padding: 20px 24px; // Figma: 20px top, 24px sides
+$card-content-gap: 20px; // Figma spacing between elements
+$card-title-height: 60px; // Figma exact value (342 × 60 Hug)
 

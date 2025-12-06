@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Online Courses — Test Task</title>
 
+    <!-- Google Fonts - Lato -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Styles -->
     <link rel="stylesheet" href="./dist/css/main.css" />
   </head>
@@ -12,55 +20,37 @@
   <body>
     <section class="courses">
       <div class="courses__container">
-        <header class="courses__header">
-          <p class="courses__tagline">Enjoy your studying!</p>
+        <div class="courses__heading">
+          <p class="courses__subtitle">ENJOY YOUR STUDYING!</p>
           <h1 class="courses__title">Our online courses</h1>
-        </header>
+        </div>
 
         <div class="courses__controls">
-          <ul class="courses__filters">
-            <li class="courses__filter-item">
-              <button
-                class="courses__filter-button courses__filter-button_active"
-                data-category="All"
-              >
-                All
-              </button>
-            </li>
-            <li class="courses__filter-item">
-              <button class="courses__filter-button" data-category="Marketing">
-                Marketing
-              </button>
-            </li>
-            <li class="courses__filter-item">
-              <button class="courses__filter-button" data-category="Management">
-                Management
-              </button>
-            </li>
-            <li class="courses__filter-item">
-              <button
-                class="courses__filter-button"
-                data-category="HR & Recruiting"
-              >
-                HR & Recruiting
-              </button>
-            </li>
-            <li class="courses__filter-item">
-              <button class="courses__filter-button" data-category="Design">
-                Design
-              </button>
-            </li>
-            <li class="courses__filter-item">
-              <button
-                class="courses__filter-button"
-                data-category="Development"
-              >
-                Development
-              </button>
-            </li>
-          </ul>
+          <div class="categories">
+            <button
+              class="categories__tab categories__tab--active"
+              data-category="All"
+            >
+              All
+            </button>
+            <button class="categories__tab" data-category="Marketing">
+              Marketing
+            </button>
+            <button class="categories__tab" data-category="Management">
+              Management
+            </button>
+            <button class="categories__tab" data-category="HR & Recruiting">
+              HR & Recruiting
+            </button>
+            <button class="categories__tab" data-category="Design">
+              Design
+            </button>
+            <button class="categories__tab" data-category="Development">
+              Development
+            </button>
+          </div>
 
-          <div class="search courses__search">
+          <div class="search">
             <input
               type="text"
               class="search__input"

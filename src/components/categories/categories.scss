@@ -2,38 +2,21 @@
 @import "../../styles/mixins";
 
 // ============================================
-// FILTERS COMPONENT (pixel-perfect from Figma)
+// CATEGORIES COMPONENT (BEM block)
 // ============================================
 
-.courses__filters {
+.categories {
   display: flex;
-  list-style: none;
   flex-wrap: wrap;
-  gap: 12px;
-  min-width: 0; /* prevents pushing layout */
-  overflow-x: auto;
-  scrollbar-width: thin;
-  -webkit-overflow-scrolling: touch;
+  gap: 12px; /* spacing between tabs */
+  min-width: 0;
+  flex: 1 1 0;
+  max-width: 100%;
+  margin: 0; /* no external margin */
+  padding: 0; /* no internal padding */
 }
 
-.courses__filters::-webkit-scrollbar {
-  height: 4px;
-}
-
-.courses__filters::-webkit-scrollbar-track {
-  background: $gray-100;
-}
-
-.courses__filters::-webkit-scrollbar-thumb {
-  background: $gray-300;
-  border-radius: 2px;
-}
-
-.courses__filter-item {
-  flex-shrink: 0;
-}
-
-.courses__filter-button {
+.categories__tab {
   @include tab-button(false);
   padding: clamp(6px, 1vw, 10px) clamp(12px, 2vw, 20px);
   height: auto;
@@ -44,39 +27,48 @@
   justify-content: center;
   transition: all 0.2s ease;
   cursor: pointer;
+  margin: 0; /* no external margin */
+  border: none;
+  font-family: inherit;
 }
 
-.courses__filter-button:hover {
+.categories__tab:hover {
   border-color: $primary;
   color: $primary;
   background: $white;
 }
 
-.courses__filter-button:focus {
+.categories__tab:focus {
   outline: 2px solid $primary;
   outline-offset: 2px;
 }
 
-.courses__filter-button_active {
+.categories__tab--active {
   @include tab-button(true);
+  outline: none; /* убираем outline для активной кнопки, чтобы не было двойной обводки */
 }
 
-.courses__filter-button_active:hover {
+.categories__tab--active:focus {
+  outline: none; /* убираем outline при фокусе на активной кнопке */
+}
+
+.categories__tab--active:hover {
   background: $white;
   border-color: $primary;
   color: $primary;
 }
 
 // Category counters
-.courses__filter-button sup {
+.categories__tab sup {
   font-size: $tab-count-size;
   color: $tab-count-color;
   font-weight: 400;
-  margin-left: 4px;
+  margin-left: 4px; /* internal spacing, OK */
   position: relative;
   top: -1px;
 }
 
-.courses__filter-button_active sup {
+.categories__tab--active sup {
   color: $primary;
 }
+

@@ -8,24 +8,35 @@
 .courses {
   padding-top: clamp(24px, 5vw, 72px);
   padding-bottom: clamp(24px, 5vw, 72px);
+  padding-left: 24px; /* горизонтальный padding перенесен сюда */
+  padding-right: 24px; /* горизонтальный padding перенесен сюда */
   background-color: $white;
 }
 
 .courses__container {
-  max-width: 1320px;
+  max-width: 1230px;
+  width: 100%;
   margin: 0 auto;
-  padding-left: clamp(16px, 4vw, 24px);
-  padding-right: clamp(16px, 4vw, 24px);
+  padding: 0; /* remove all horizontal padding */
   /* Prevent child elements from overflowing */
   overflow: hidden;
 }
 
-.courses__header {
-  margin-bottom: clamp(16px, 3vw, 60px);
-  text-align: center;
+.courses__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px; /* по Figma между subtitle и h1 */
+  margin-bottom: clamp(
+    40px,
+    5vw,
+    80px
+  ); /* увеличенное расстояние до фильтров */
+  width: 100%;
 }
 
-.courses__tagline {
+// ENJOY YOUR STUDYING!
+.courses__subtitle {
   @include text-style(
     $subtitle-size,
     $subtitle-weight,
@@ -34,14 +45,19 @@
     $subtitle-letter-spacing
   );
   text-transform: uppercase;
-  margin-bottom: 12px;
-  font-size: clamp(12px, 1.4vw, $subtitle-size);
-  letter-spacing: clamp(0.5px, 0.2vw, $subtitle-letter-spacing);
+  margin: 0; /* no external margin */
 }
 
+// Our online courses
 .courses__title {
-  @include text-style($h1-size, $h1-weight, $black, $h1-line-height);
-  font-size: clamp(28px, 3vw, $h1-size);
+  @include text-style($h1-size, $h1-weight, $gray-900, $h1-line-height, 0);
+  margin: 0; /* no external margin */
+  max-width: 392px; /* Figma exact width - limit but don't force */
+  white-space: nowrap; /* prevent text wrapping to 2 lines */
+  text-align: center;
+  font-size: 46px; /* вернул оригинальный размер */
+  font-weight: 700; /* обычный жирный вместо 900 */
+  letter-spacing: 0; /* вернул оригинальный spacing */
 }
 
 // ============================================
@@ -50,29 +66,23 @@
 
 .courses__controls {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between; /* фильтры слева, поиск справа */
   width: 100%;
-  max-width: 100%;
-  /* REMOVE any margins set by Cursor earlier */
-  margin: 0;
-  margin-bottom: clamp(24px, 4vw, 40px);
-  /* Prevent inner items from pushing outside */
-  min-width: 0;
-  /* Gap only between filter group and search */
+  max-width: 1230px;
+  margin: 0 auto;
+  margin-bottom: clamp(
+    40px,
+    5vw,
+    60px
+  ); /* увеличенное расстояние до карточек по Figma */
   gap: 16px;
   box-sizing: border-box;
+  /* Prevent inner items from pushing outside */
+  min-width: 0;
 }
 
-.courses__filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  /* VERY IMPORTANT */
-  min-width: 0;
-  flex: 1 1 0;
-  max-width: 100%;
-}
+// Categories block is imported from components
 
 // ============================================
 // GRID (pixel-perfect 3 columns at 1920px)
@@ -80,9 +90,13 @@
 
 .courses__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, $card-width);
-  gap: $cards-gap-x;
-  margin-bottom: clamp(24px, 3vw, 40px);
+  grid-template-columns: repeat(3, $card-width); // 3 columns - Figma exact
+  gap: $cards-gap-x; // 30px - Figma exact
+  margin-bottom: clamp(
+    60px,
+    6vw,
+    80px
+  ); /* увеличенное расстояние до Load more по Figma */
   width: 100%;
   justify-content: space-between;
 }
@@ -92,16 +106,16 @@
 // ============================================
 
 @media (max-width: $breakpoint-mobile) {
-  .courses__container {
-    padding-left: 16px;
-    padding-right: 16px;
+  .courses {
+    padding-left: 16px; /* мобильный padding */
+    padding-right: 16px; /* мобильный padding */
   }
 
   .courses__title {
     font-size: 24px;
   }
 
-  .courses__tagline {
+  .courses__subtitle {
     font-size: 11px;
   }
 
@@ -111,8 +125,10 @@
     gap: 16px;
   }
 
-  .courses__search {
-    width: 100%;
+  .search {
+    width: 100%; // на мобильных растягиваем на всю ширину
+    max-width: 100%;
+    margin-left: 0; // убираем auto на мобильных
   }
 
   .courses__grid {

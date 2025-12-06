@@ -40,9 +40,9 @@ function getBadgeClass(category) {
 // Filter functionality
 function setActiveFilter(button) {
   document
-    .querySelectorAll(".courses__filter-button")
-    .forEach((btn) => btn.classList.remove("courses__filter-button_active"));
-  button.classList.add("courses__filter-button_active");
+    .querySelectorAll(".categories__tab")
+    .forEach((btn) => btn.classList.remove("categories__tab--active"));
+  button.classList.add("categories__tab--active");
 }
 
 function applyFilters(resetCount = true) {
@@ -90,7 +90,7 @@ function createCardHTML(course) {
       </div>
 
       <div class="course-card__content">
-        <span class="course-card__badge ${badgeClass}">
+        <span class="course-card__badge badge ${badgeClass}">
           ${course.category}
         </span>
         <h2 class="course-card__title">${course.title}</h2>
@@ -146,7 +146,7 @@ function updateFilterButtons() {
     Development: "Development",
   };
 
-  const buttons = document.querySelectorAll(".courses__filter-button");
+  const buttons = document.querySelectorAll(".categories__tab");
 
   buttons.forEach((btn) => {
     const category = btn.dataset.category;
@@ -161,10 +161,10 @@ function updateFilterButtons() {
 
 // Initialize filters and search
 function initFilters() {
-  const filtersContainer = document.querySelector(".courses__filters");
+  const categoriesContainer = document.querySelector(".categories");
 
-  if (!filtersContainer) {
-    console.error("Filters container not found!");
+  if (!categoriesContainer) {
+    console.error("Categories container not found!");
     return;
   }
 
@@ -172,8 +172,8 @@ function initFilters() {
   updateFilterButtons();
 
   // Category filter click handler
-  filtersContainer.addEventListener("click", (event) => {
-    const btn = event.target.closest(".courses__filter-button");
+  categoriesContainer.addEventListener("click", (event) => {
+    const btn = event.target.closest(".categories__tab");
     if (!btn) return;
 
     const category = btn.dataset.category;
