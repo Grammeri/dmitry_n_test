@@ -2,34 +2,66 @@
 @import "mixins";
 
 // ============================================
-// PAGE CONTAINER
-// ============================================
-
-.container {
-  @include container;
-}
-
-// ============================================
 // COURSES SECTION
 // ============================================
 
 .courses {
-  padding-top: clamp(24px, 5vw, 48px);
-  padding-bottom: clamp(24px, 5vw, 48px);
+  padding: 80px 20px;
+  background-color: #ffffff;
+}
 
-  &__header {
-    @include flex-between;
-    margin-bottom: $spacing-8;
-  }
+.courses__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  &__filters {
-    margin-bottom: $spacing-8;
-  }
+.courses__header {
+  margin-bottom: 60px;
+  text-align: center;
+}
 
-  &__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: clamp($card-gap-min, 2vw, $card-gap-max);
-    justify-content: center;
-  }
+.courses__tagline {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 1px;
+  color: #1e212c;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.courses__title {
+  font-size: 46px;
+  font-weight: 900;
+  line-height: 130%;
+  color: #1e212c;
+}
+
+// ============================================
+// CONTROLS (Filters + Search)
+// ============================================
+
+.courses__controls {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 40px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.courses__filters {
+  flex: 1;
+  max-width: calc(390px * 3 + 30px * 2); // ширина 3 карточек + 2 gap
+}
+
+// ============================================
+// GRID
+// ============================================
+
+.courses__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
 }

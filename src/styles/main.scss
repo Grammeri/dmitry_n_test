@@ -1,0 +1,42 @@
+@import "./vars";
+@import "./mixins";
+@import "./base";
+@import "./layout";
+
+// components
+@import "../components/card/card";
+@import "../components/filters/filters";
+@import "../components/search/search";
+
+// ============================================
+// LOAD MORE BUTTON
+// ============================================
+
+.courses__load-more {
+  display: block;
+  margin: 0 auto;
+  padding: 14px 32px;
+  background-color: $color-primary;
+  color: $color-text-inverse;
+  border: none;
+  border-radius: $border-radius-button;
+  font-size: $font-size-filter;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: $transition-base;
+}
+
+.courses__load-more:hover {
+  background-color: $color-primary-hover;
+  transform: translateY(-2px);
+  box-shadow: $shadow-button-hover;
+}
+
+.courses__load-more:focus {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+.courses__load-more:active {
+  transform: translateY(0);
+}

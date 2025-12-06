@@ -2,98 +2,140 @@
 @import "../../styles/mixins";
 
 // ============================================
-// CARD COMPONENT
+// CARD COMPONENT (pixel-perfect from Figma)
 // ============================================
 
-.card {
-  @include card-base;
-  @include flex-column;
-  @include card-hover-shadow;
-  @include shadow-transition;
-
-  flex: 1 1 $card-width-clamp;
+.course-card {
+  width: $card-width;
+  height: $card-height;
+  background-color: $color-bg-primary;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-card;
   overflow: hidden;
-  gap: clamp($card-gap-min, 1vw, $card-gap-max);
+  box-shadow: $shadow-card;
+  transition: $transition-base;
+  cursor: pointer;
+}
 
-  &--hidden {
-    display: none;
-  }
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: $shadow-card-hover;
 }
 
 // ============================================
-// CARD IMAGE
+// CARD IMAGE WRAPPER
 // ============================================
 
-.card__image {
-  @include fixed-img;
-  display: block;
-  margin: 0;
+.course-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  height: $card-image-height;
+  overflow: hidden;
+  background-color: $color-bg-secondary;
+}
+
+.course-card__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: $border-radius-card $border-radius-card 0 0;
 }
 
 // ============================================
-// CARD BODY
+// CARD CONTENT
 // ============================================
 
-.card__body {
-  @include flex-column;
-  gap: $spacing-2;
-  flex: 1;
+.course-card__content {
+  padding: $card-content-padding;
+  display: flex;
+  flex-direction: column;
+  gap: $card-content-gap;
+  height: calc(#{$card-height} - #{$card-image-height});
 }
 
 // ============================================
-// CARD TAG (PILL)
+// CARD BADGE
 // ============================================
 
-.card__tag {
+.course-card__badge {
   display: inline-block;
-  padding: $spacing-1 $spacing-3;
-  border-radius: $border-radius-full;
-  background: $color-bg-secondary;
-  color: $color-text-secondary;
-  @include text-xs;
-  font-weight: $font-weight-medium;
+  padding: $badge-padding-y $badge-padding-x;
+  height: $badge-height;
+  font-size: $font-size-badge;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-badge;
+  border-radius: $border-radius-badge;
+  color: $color-text-inverse;
+  margin-bottom: $spacing-3;
   width: fit-content;
+}
+
+/* Category badge colors */
+.badge--marketing {
+  background-color: $color-badge-marketing;
+}
+
+.badge--management {
+  background-color: $color-badge-management;
+}
+
+.badge--hr {
+  background-color: $color-badge-hr;
+}
+
+.badge--design {
+  background-color: $color-badge-design;
+}
+
+.badge--development {
+  background-color: $color-badge-development;
 }
 
 // ============================================
 // CARD TITLE
 // ============================================
 
-.card__title {
-  @include heading-sm;
-  color: $color-text-primary;
-  @include ellipsis-lines(2);
-  margin: 0;
-}
-
-// ============================================
-// CARD META (Price + Author container)
-// ============================================
-
-.card__meta {
-  @include flex-between;
-  margin-top: auto;
-  gap: $spacing-2;
-}
-
-// ============================================
-// CARD PRICE
-// ============================================
-
-.card__price {
-  @include text-lg;
+.course-card__title {
+  font-size: $font-size-card-title;
   font-weight: $font-weight-bold;
+  line-height: $line-height-card-title;
   color: $color-text-primary;
   margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 // ============================================
-// CARD AUTHOR
+// CARD META (Price + Author)
 // ============================================
 
-.card__author {
-  @include text-sm;
+.course-card__meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  margin-top: auto;
+}
+
+.course-card__price {
+  font-size: $font-size-price;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-price;
+  color: $color-price;
+}
+
+.course-card__separator {
   color: $color-text-secondary;
-  @include ellipsis;
-  margin: 0;
+  font-size: $font-size-author;
+}
+
+.course-card__author {
+  font-size: $font-size-author;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-author;
+  color: $color-text-secondary;
 }

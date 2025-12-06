@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "sass": "sass src/styles:styles --watch"
+    "scss": "sass --watch src/styles/main.scss dist/css/main.css",
+    "scss:build": "sass src/styles/main.scss dist/css/main.css"
   },
   "devDependencies": {
     "sass": "^1.94.2"
   }
 }
-
